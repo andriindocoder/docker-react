@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - echo Building Docker image...
+      - docker build -t andriwicaksono/docker-react -f Dockerfile.dev .
+
+  build:
+    commands:
+      - echo Running tests...
+      - docker run -e CI=true andriwicaksono/docker-react npm run test
